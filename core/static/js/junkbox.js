@@ -5,17 +5,32 @@
 
     .controller('musics', function($scope) {
 
+
             var socket = io();
 
             var musics = [];
-            var twitters = [];
+
+
 
             $scope.musics = [];
 
             socket.on('music', function(msg) {
-                msg.played = false;
-                $scope.musics.push(msg);
+                var added = false;
+                for(var i = 0; i < $scope.musics.length; i++){
+                    if(msg.name == $scope.musics[i].name){
+                        $scope.musics[i].votes++;
+                        added = true;
+                        break;
+                    }
+                }
+
+                if(!added){
+                    msg.played = false;
+                    $scope.musics.push(msg);
+                }
+
                 $scope.$apply();
+
             });
         })
         .controller('dj-twitters', function($scope) {
@@ -53,8 +68,8 @@
             var i = 0;
             $interval(function() {
                 $scope.tweet = tweet[i];
-                $scope.tmpTweet = tweet[i+1];
-                if((i + 1) != tweet.length){
+                $scope.tmpTweet = tweet[i + 1];
+                if ((i + 1) != tweet.length) {
                     i++;
                 }
             }, 3000);

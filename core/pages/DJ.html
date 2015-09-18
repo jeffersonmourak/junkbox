@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>The JunkBox</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/dj.css">
 </head>
 
 <body>
@@ -17,20 +18,28 @@
                     <input ng-model="searchText" type="text" class="form-control" aria-describedby="basic-addon1">
                 </div>
                 <br>
-		        <ul class="list-group">
-		            <li ng-repeat="music in musics | orderBy:'-votes' | filter:searchText" ng-hide="music.played" class="list-group-item">
-		                <span>
-		                	<button type="button" ng-click="music.played = true" class="btn btn-danger">
-		                		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-		                	</button>
-		                </span>
-		                <span>
-		                	<img ng-src="{{music.user}}">
-		                	<span>{{music.name}}</span>
-		                </span>
-		                <span class="badge">{{music.votes}}</span>
-		            </li>
-		        </ul>
+                <ul class="list-group">
+                    <li ng-repeat="music in musics | orderBy:'-votes' | filter:searchText" ng-hide="music.played" class="list-group-item tracks">
+                        <span>
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <button style="display:inline-block;" type="button" ng-click="music.played = true" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                    </button>
+                                    <h3 style="display:inline-block;" class="panel-title">{{music.name}}</h3>
+                                    <span style="float:right;" class="badge">{{music.votes}}</span>
+                                </div>
+                                <div class="panel-body">
+                                    <img class="album-cover" ng-src="{{music.album.images[2].url}}" alt="{{music.album.name}}">
+                                    <span style="display:inline-block;">
+                                        <h3>{{music.name}}</h2>
+                                        <h4>{{music.album.name}}</h4>
+                                    </span>
+                                </div>
+                            </div>
+                        </span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
@@ -44,7 +53,7 @@
             </li>
         </ul>
     </div>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
     <script src="/socket.io/socket.io.js"></script>
