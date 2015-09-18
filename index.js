@@ -1,6 +1,8 @@
 (function() {
     "use strict";
 
+    var hashtag = process.argv.slice(2)[0];
+
     var SpotifyWebApi = require('spotify-web-api-node');
 
     var Similar = require("./core/likely").similar;
@@ -17,7 +19,9 @@
         redirectUri: 'http://jeffersonmourak.com'
     });
 
-    var toTrack = "#TESTEIMD";
+    var toTrack = hashtag;
+
+    console.log("Tracking the hastag \"" + toTrack + "\"");
 
     server.start(3000);
     tracker.track(toTrack);
