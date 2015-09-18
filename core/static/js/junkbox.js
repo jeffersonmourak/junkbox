@@ -3,14 +3,14 @@
 
     angular.module('junkbox', ['ngAnimate'])
 
-    .controller('musics', function($scope) {
+    .controller('musics', function($scope,$sce) {
 
 
             var socket = io();
 
             var musics = [];
 
-
+            $scope.url = "";
 
             $scope.musics = [];
 
@@ -26,6 +26,7 @@
 
                 if(!added){
                     msg.played = false;
+                    msg.uri = $sce.trustAsResourceUrl("http://embed.spotify.com/?uri=" + msg.uri);
                     $scope.musics.push(msg);
                 }
 
@@ -53,6 +54,8 @@
 
             var tweet = [];
 
+
+
             socket.on('tweet', function(msg) {
                 console.log(msg);
                 tweet.push({
@@ -69,7 +72,7 @@
             $interval(function() {
                 $scope.tweet = tweet[i];
                 $scope.tmpTweet = tweet[i + 1];
-                if ((i + 1) != tweet.length) {
+                if ((i + 1) < tweet.length) {
                     i++;
                 }
             }, 3000);

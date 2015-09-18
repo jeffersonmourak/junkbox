@@ -33,9 +33,7 @@
 
         spotifyApi.searchTracks(thisMusic)
             .then(function(data) {
-                console.log("Spotify Returned");
                 var thisMusic = data.body.tracks.items[0];
-                console.log(thisMusic);
                 for (i in musics) {
                     var music = musics[i];
 
@@ -60,7 +58,8 @@
                             images: thisMusic.album.images
                         },
                         votes: 1,
-                        user: tweet.user.profile_image_url
+                        user: tweet.user.profile_image_url,
+                        uri: thisMusic.uri
                     };
                     musics.push(music);
                     io.emit("music", music);
