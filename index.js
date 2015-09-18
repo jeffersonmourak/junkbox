@@ -16,7 +16,7 @@
     var spotifyApi = new SpotifyWebApi({
         clientId: '211a53c6f95c42bf9c8284d2a0094ede',
         clientSecret: '7ecaa066578446a9a3c57d2bf76eab82',
-        redirectUri: 'http://jeffersonmourak.com'
+        redirectUri: 'http://jeffersonmourak.com' 
     });
 
     var toTrack = hashtag;
