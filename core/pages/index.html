@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="junkbox">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The JunkBox</title>
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700,400|Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/present.css">
+</head>
+
+<body ng-controller="twitters">
+    <div class="cover" style="background-image: url({{tweet.cover}});">
+    	<div class="photo" style="background-image: url({{tweet.photo}});"></div>
+    </div>
+    <div class="content">
+        <h1>{{tweet.name}}</h1>
+        <h3>{{tweet.username}}</h3>
+        <p>
+	        <span class="quotes">&quot;</span>
+	        {{tweet.tweet}}
+	        <span class="quotes">&quot;</span>
+        </p>
+    </div>
+    
+    <img src="{{tmpTweet.cover}}" style="display:none;">
+    <img src="{{tmpTweet.photo}}" style="display:none;">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/static/js/junkbox.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Cabin', sans-serif;
+}
+
+.list-group-item span{
+    line-height: 40px;
+    margin-left: 20px;
+}
+
+
+.list-group-item.ng-move,
+.list-group-item.ng-enter,
+.list-group-item.ng-leave {
+  transition:all ease 0.5s;
+}
+
+.list-group-item.ng-leave.ng-leave-active,
+.list-group-item.ng-move,
+.list-group-item.ng-enter {
+  opacity:0;
+  max-height:0;
+}
+
+.list-group-item.ng-leave,
+.list-group-item.ng-move.ng-move-active,
+.list-group-item.ng-enter.ng-enter-active {
+  opacity:1;
+  max-height:40px;
+}

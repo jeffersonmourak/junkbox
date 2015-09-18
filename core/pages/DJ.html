@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="junkbox">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The JunkBox</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body>
+    <h1>Welcome to JunkBox</h1>
+    <div ng-controller="musics" class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="input-group">
+                    <span class="input-group-addon" id="basic-addon1">Pesquisar Pedido</span>
+                    <input ng-model="searchText" type="text" class="form-control" aria-describedby="basic-addon1">
+                </div>
+                <br>
+		        <ul class="list-group">
+		            <li ng-repeat="music in musics | orderBy:'-votes' | filter:searchText" ng-hide="music.played" class="list-group-item">
+		                <span>
+		                	<button type="button" ng-click="music.played = true" class="btn btn-danger">
+		                		<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		                	</button>
+		                </span>
+		                <span>
+		                	<img ng-src="{{music.user}}">
+		                	<span>{{music.name}}</span>
+		                </span>
+		                <span class="badge">{{music.votes}}</span>
+		            </li>
+		        </ul>
+            </div>
+        </div>
+    </div>
+    <div ng-controller="dj-twitters" class="col-md-4">
+        <ul class="list-group">
+            <li ng-repeat="tweet in twitters" class="list-group-item">
+                <img ng-src="{{tweet.photo}}"> <span>{{tweet.name}} ({{tweet.username}}) </span>
+                <p>
+                    {{tweet.tweet}}
+                </p>
+            </li>
+        </ul>
+    </div>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/static/js/junkbox.js"></script>
+</body>
+
+</html>
