@@ -67,6 +67,7 @@
                     cover: msg.user.profile_banner_url,
                     tweet: msg.text,
                     image: msg.entities.media[0].media_url
+                    tweet: msg.text
                 });
             });
             var i = 0;
