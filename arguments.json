@@ -1,0 +1,11 @@
+[
+	{
+	    "name": "twitter",
+	    "shortcut": "t",
+	    "requestValue": true
+	}, {
+	    "name": "instagram",
+	    "shortcut": "i",
+	    "requestValue": true,
+	}
+]

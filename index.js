@@ -1,11 +1,26 @@
 (function() {
     "use strict";
 
-    var hashtag = process.argv.slice(2)[0];
+    var hashtag = process.argv.slice(2);
+
+    var acceptable = [{
+        "name": "twitter",
+        "shortcut": "t",
+        "requestValue": true
+    }, {
+        "name": "instagram",
+        "shortcut": "i",
+        "requestValue": true,
+    }];
+    var argumentManager = require("./core/arguments");
+    var ArgumentQuery = argumentManager.arguments(hashtag, acceptable);
 
     var SpotifyWebApi = require('spotify-web-api-node');
 
-    var Similar = require("./core/likely").similar;
+    var Instatracker = require("./core/instagram");
+
+    var instagram = new Instatracker.instaTracker();
+
     var Tracker = require("./core/tracker").tracker;
     var Server = require("./core/server");
     var server = new Server.server();
@@ -16,62 +31,72 @@
     var spotifyApi = new SpotifyWebApi({
         clientId: '211a53c6f95c42bf9c8284d2a0094ede',
         clientSecret: '7ecaa066578446a9a3c57d2bf76eab82',
-        redirectUri: 'http://jeffersonmourak.com' 
+        redirectUri: 'http://jeffersonmourak.com'
     });
 
-    var toTrack = hashtag;
-
-    console.log("Tracking the hastag \"" + toTrack + "\"");
-
     server.start(3000);
-    tracker.track(toTrack);
 
-    tracker.data = function(tweet) {
-        var thisMusic = tweet.text.replace(toTrack, "");
-        var i = 0;
-        var added = false;
+    if (ArgumentQuery.twitter !== false) {
+        console.log("")
+        tracker.track("#" + ArgumentQuery.twitter);
 
-        spotifyApi.searchTracks(thisMusic)
-            .then(function(data) {
-                var thisMusic = data.body.tracks.items[0];
-                for (i in musics) {
-                    var music = musics[i];
+        tracker.data = function(tweet) {
+            console.log("tracking \"#" + ArgumentQuery.twitter);
+            var thisMusic = tweet.text.replace(ArgumentQuery.twitter, "");
+            var i = 0;
+            var added = false;
 
-                    if(thisMusic.name == music.name){
-                        music.votes++;
-                        added = true;
-                        io.emit("music", music);
-                        break;
+            spotifyApi.searchTracks(thisMusic)
+                .then(function(data) {
+                    var thisMusic = data.body.tracks.items[0];
+                    for (i in musics) {
+                        var music = musics[i];
+
+                        if (thisMusic.name == music.name) {
+                            music.votes++;
+                            added = true;
+                            io.emit("music", music);
+                            break;
+                        }
+
+
+                        musics[i] = music;
                     }
-                    
 
-                    musics[i] = music;
-                }
+                    if (!added) {
 
-                if (!added) {
-
-                    var music = {
-                        name: thisMusic.name,
-                        preview: thisMusic.preview_url,
-                        album: {
-                            name: thisMusic.album.name,
-                            images: thisMusic.album.images
-                        },
-                        votes: 1,
-                        user: tweet.user.profile_image_url,
-                        uri: thisMusic.uri
-                    };
-                    musics.push(music);
-                    io.emit("music", music);
-                }
+                        var music = {
+                            name: thisMusic.name,
+                            preview: thisMusic.preview_url,
+                            album: {
+                                name: thisMusic.album.name,
+                                images: thisMusic.album.images
+                            },
+                            votes: 1,
+                            user: tweet.user.profile_image_url,
+                            uri: thisMusic.uri
+                        };
+                        musics.push(music);
+                        io.emit("music", music);
+                    }
 
 
-            }, function(err) {
-                console.error(err);
-            });
+                }, function(err) {
+                    console.error(err);
+                });
 
-        io.emit("tweet", tweet);
+            io.emit("tweet", tweet);
+        }
     }
+
+    if (ArgumentQuery.instagram !== false) {
+        console.log("tracking \"#" + ArgumentQuery.instagram);
+        instagram.track(ArgumentQuery.instagram);
+        instagram.onPost = function(post) {
+            io.emit("instagram",post);
+        };
+    }
+
 
 
 })();

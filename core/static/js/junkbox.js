@@ -58,8 +58,23 @@
 
             $scope.loadingNext = false;
 
+            socket.on("instagram",function(post){
+                
+                tweet.push({
+                    photo: post.user.profile_picture,
+                    username: post.user.username,
+                    name: post.user.full_name,
+                    background_image: "",
+                    background_color: "#fff",
+                    cover: "",
+                    tweet: post.caption.text,
+                    image: post.images.standard_resolution.url,
+                    imageSize: "height"
+                });
+            });
+
             socket.on('tweet', function(msg) {
-                console.log(msg);
+                
 
                 var media = msg.entities.media;
                 var style = false;
@@ -102,7 +117,7 @@
                     $scope.loadingNext = false;
                 }, 1000);
 
-            }, 2000);
+            }, 5000);
 
         });
 
