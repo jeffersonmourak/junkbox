@@ -3,7 +3,7 @@
 
     angular.module('junkbox', ['ngAnimate'])
 
-    .controller('musics', function($scope,$sce) {
+    .controller('musics', function($scope, $sce) {
 
 
             var socket = io();
@@ -16,15 +16,15 @@
 
             socket.on('music', function(msg) {
                 var added = false;
-                for(var i = 0; i < $scope.musics.length; i++){
-                    if(msg.name == $scope.musics[i].name){
+                for (var i = 0; i < $scope.musics.length; i++) {
+                    if (msg.name == $scope.musics[i].name) {
                         $scope.musics[i].votes++;
                         added = true;
                         break;
                     }
                 }
 
-                if(!added){
+                if (!added) {
                     msg.played = false;
                     msg.uri = $sce.trustAsResourceUrl("http://embed.spotify.com/?uri=" + msg.uri);
                     $scope.musics.push(msg);
@@ -48,16 +48,30 @@
                 $scope.$apply();
             });
         })
-        .controller('twitters', function($scope, $interval) {
+        .controller('twitters', function($scope, $interval, $timeout) {
 
             var socket = io();
 
             var tweet = [];
 
+            $scope.tweet = false;
 
+            $scope.loadingNext = false;
 
             socket.on('tweet', function(msg) {
                 console.log(msg);
+
+                var media = msg.entities.media;
+                var style = false;
+
+                if (media !== undefined) {
+                    if (media[0].sizes.large.w > media[0].sizes.large.h) {
+                        style = "width";
+                    } else {
+                        style = "height";
+                    }
+                }
+
                 tweet.push({
                     photo: msg.user.profile_image_url.replace("_normal", ""),
                     username: msg.user.screen_name,
@@ -66,18 +80,29 @@
                     background_color: "#" + msg.user.profile_background_color,
                     cover: msg.user.profile_banner_url,
                     tweet: msg.text,
-                    image: msg.entities.media[0].media_url
-                    tweet: msg.text
+                    image: media !== undefined ? media[0].media_url + ":large" : false,
+                    imageSize: style
                 });
             });
             var i = 0;
+            var lastI = 0;
             $interval(function() {
-                $scope.tweet = tweet[i];
-                $scope.tmpTweet = tweet[i + 1];
-                if ((i + 1) < tweet.length) {
-                    i++;
+
+                if (tweet.length > lastI) {
+                    $scope.loadingNext = true;
                 }
-            }, 3000);
+                $timeout(function() {
+                    $scope.tweet = tweet[i];
+                    $scope.tmpTweet = tweet[i + 1];
+                    lastI++;
+                    if ((i + 1) < tweet.length) {
+                        lastI = i;
+                        i++;
+                    }
+                    $scope.loadingNext = false;
+                }, 1000);
+
+            }, 2000);
 
         });
 

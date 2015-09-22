@@ -10,24 +10,24 @@
 </head>
 
 <body ng-controller="twitters">
-    <div class="cover" style="background-image: url({{tweet.cover}});">
-    	<div class="photo" style="background-image: url({{tweet.photo}});"></div>
-    </div>
-    <div class="content">
-        <h1>{{tweet.name}}</h1>
-        <h3>{{tweet.username}}</h3>
-        <p>
-	        <span class="quotes">&quot;</span>
-	        {{tweet.tweet}}
-	        <span class="quotes">&quot;</span>
-        </p>
-        <p ng-if="{{tweet.image}}">
-            <img style="width:100%; height:auto;" ng-src="{{tweet.image}}">
-        </p>
-    </div>
     
-    <img src="{{tmpTweet.cover}}" style="display:none;">
-    <img src="{{tmpTweet.photo}}" style="display:none;">
+    <div class="media">
+        <img ng-src="{{tweet.image}}" style="{{tweet.imageSize}}:100%;">
+    </div>
+    <div class="media content">
+        
+        <div class="message">
+            <h1>{{tweet.tweet}}</h1>
+        </div>
+
+        <div class="user">
+            <div class="image" style="background-image: url({{tweet.photo}});"></div>
+            <div class="data">
+                <h1>{{tweet.name}}</h1>
+                <h3>{{tweet.username}}</h3>
+            </div>
+        </div>
+    </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
@@ -37,32 +37,3 @@
 </body>
 
 </html>
-<footer class="text-center">
-        <div class="footer-above">
-            <div class="container">
-                <div class="row">
-                    <div class="footer-col col-md-8">
-                        
-                        <div class="footer-col" style="display: inline-block; margin-left: 40px;">
-                         <h3 style="display: inline-block;">Contato</h3>
-                        <p>E-mail: contato-au@aurumsistemas.com.br</p>
-                        <p>Telefone: (84)9987-4770</p>
-                    </div>
-                    </div>
-                    <div class="footer-col col-md-3">
-                       <img src="/static/avatar.png" alt="" width =  '70%'>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-        <div class="footer-below">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        Copyright © Aurum Desenvolvimento de Soluções 2015
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
