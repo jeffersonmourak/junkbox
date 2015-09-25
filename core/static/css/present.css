@@ -104,8 +104,8 @@
 
 .message{
   position: absolute;
-  top: calc(50vh - 100px);
-  left: 10%;
+  bottom: 35px;
+  left: 15px;
   width: 80%;
   height: auto;
   border-radius: 54.5px;
