@@ -9,6 +9,15 @@ function instaTracker(){
 
 var ignore = [];
 
+function isIn(value, array){
+	for(var i in array){
+		if(value == array[i]){
+			return true;
+		}
+	}
+	return false;
+}
+
 instaTracker.prototype = {
 	track: function(tag){
 		var self = this;
@@ -17,14 +26,15 @@ instaTracker.prototype = {
 			    name: tag,
 			    complete: function(data, pagination) {
 					for(var i in data){
-						if((data[i].id in ignore) === false){
+						if(isIn(data[i].id, ignore) === false){
 							self.onPost(data[i]);
 							ignore.push(data[i].id);
+							console.log(ignore);
 						}
 					}
 				}
 			});
-		}, 1000);
+		}, 5000);
 	},
 	onPost: function(post){}
 }
