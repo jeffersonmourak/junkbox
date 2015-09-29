@@ -12,19 +12,19 @@
 <body ng-controller="twitters">
     
     <div class="media">
-        <img ng-src="{{tweet.image}}" style="{{tweet.imageSize}}:100%;">
+        <img ng-src="{{post.image || advise.image}}" style="{{post.size || advise.size}}:100%;">
     </div>
-    <div class="media content">
+    <div class="media content" ng-if="post !== false">
         
         <div class="message">
-            <h1>{{tweet.tweet}}</h1>
+            <h1>{{post.text}}</h1>
         </div>
 
-        <div class="user">
-            <div class="image" style="background-image: url({{tweet.photo}});"></div>
+        <div ng-if="!loading" class="user">
+            <div class="image" style="background-image: url({{post.photo}});"></div>
             <div class="data">
-                <h1>{{tweet.name}}</h1>
-                <h3>{{tweet.username}}</h3>
+                <h1>{{post.name}}</h1>
+                <h3>{{post.username}}</h3>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="/static/js/junkbox.js"></script>
+    <script src="/static/js/application/controllers/posts-controller.js"></script>
 </body>
 
 </html>

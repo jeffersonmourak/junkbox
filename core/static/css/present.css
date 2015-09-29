@@ -43,8 +43,6 @@
     }
 }
 
-
-
 .media{
   position: absolute;
   top: 0px;
@@ -54,7 +52,6 @@
   margin: 0 !important;
   padding: 0;
   text-align: center;
-
   background-size: cover;
   background-position: center;
 }
@@ -66,8 +63,8 @@
   width: 150px;
   height: 150px;
   border-radius: 75px;
-  
   overflow: hidden;
+  text-align: left;
 
   box-shadow: 0 8px 10px -5px rgba(0,0,0,.14),0 16px 24px 2px rgba(0,0,0,.098),0 6px 30px 5px rgba(0,0,0,.084);
   background-color: #fff;
@@ -84,7 +81,6 @@
   margin: 10px;
   border-radius: 50%;
   display: inline-block;
-
   background-size: cover;
   background-position: center;
 }

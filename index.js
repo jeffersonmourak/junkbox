@@ -2,7 +2,6 @@
     "use strict";
 
     var hashtag = process.argv.slice(2);
-
     var acceptable = [{
         "name": "twitter",
         "shortcut": "t",
@@ -34,10 +33,9 @@
         redirectUri: 'http://jeffersonmourak.com'
     });
 
-    server.start(3000);
+    server.start(3001);
 
     if (ArgumentQuery.twitter !== false) {
-        console.log("")
         tracker.track("#" + ArgumentQuery.twitter);
 
         tracker.data = function(tweet) {

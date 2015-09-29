@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="admin" ng-controller="dashboard">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The JunkBox</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="col-md-8 no-margin">
+                <div class="item highlight">
+                    <i class="ton-li-home"></i>
+                </div>
+                <div class="item">
+                    <form id="starter" action="" method="post">
+                        <a href="#" onclick="document.getElementById('starter').submit();"> <i class="ton-li-on-off"></i> </a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 no-margin">
+                <h2><i class="ton-li-nota-1"></i> Junkbox™</h2>
+            </div>
+        </nav>
+        <div class="status online">
+            <h1>Status: <span>ONLINE</span></h1>
+        </div>
+    </header>
+    <section class="content center col-md-8 col-md-offset-2">
+    </section>
+    <footer>
+        Todos os direitos Reservados, Aurum Sistemas
+    </footer>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
+    <script ng-src="{{clientSocket}}"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/static/js/application/controllers/admin-controller.js"></script>
+</body>
+
+</html>

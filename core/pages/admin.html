@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="admin" ng-controller="dashboard">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The JunkBox</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <div class="col-md-8 no-margin">
+                <div class="item highlight">
+                    <i class="ton-li-home"></i>
+                </div>
+            </div>
+            <div class="col-md-4 no-margin">
+                <h2><i class="ton-li-nota-1"></i> Junkbox™</h2>
+            </div>
+        </nav>
+        <div class="status offline">
+            <h1>Status: <span>OFFLINE</span></h1>
+        </div>
+    </header>
+    <section class="content center col-md-8 col-md-offset-2">
+        <h1>Junkbox™ OFFLINE</h1>
+        <p>Atualmente o Junkbox™ está offline, digite abaixo uma hashtag e clique no botão "Play" para iniciar</p>
+        <br>
+        <form id="starter" action="" method="post">
+            <label class="input">
+                <span>#</span>
+                <input type="text" name="hashtag" placeholder="Digite aqui a hashtag. Ex.: partyRock">
+            </label>
+            <a href="#" class="submit" onclick="document.getElementById('starter').submit();"> <i class="ton-li-music-play"></i> </a>
+        </form>
+    </section>
+    <footer>
+        Todos os direitos Reservados, Aurum Sistemas
+    </footer>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/static/js/application/controllers/admin-controller.js"></script>
+</body>
+
+</html>

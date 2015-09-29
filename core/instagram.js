@@ -29,7 +29,6 @@ instaTracker.prototype = {
 						if(isIn(data[i].id, ignore) === false){
 							self.onPost(data[i]);
 							ignore.push(data[i].id);
-							console.log(ignore);
 						}
 					}
 				}

@@ -1,13 +1,6 @@
 *{
     font-family: 'Cabin', sans-serif;
 }
-html{
-    background-color: #444;
-}
-h1{
-  color: #fff;
-  background-color: #444;
-}
 .album-cover{
     display: inline-block;
     vertical-align: top;
