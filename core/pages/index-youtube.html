@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="junkbox">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The JunkBox</title>
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700,400|Sorts+Mill+Goudy' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/present.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body ng-controller="twitters">
+    
+    <div class="media">
+        <iframe ng-if="post.videoID" ng-src="{{post.videoID}}" frameborder="0"></iframe>
+    </div>
+    <div class="media content" ng-if="post !== false">
+        
+        <div class="message">
+            <h1>{{post.text}}</h1>
+        </div>
+
+        <div ng-if="!loading" class="user">
+            <div class="image" style="background-image: url({{post.photo}});"></div>
+            <div class="data">
+                <h1>{{post.name}}</h1>
+                <h3>{{post.username}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="/static/js/application/controllers/posts-controller.js"></script>
+</body>
+
+</html>

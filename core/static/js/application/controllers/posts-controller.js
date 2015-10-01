@@ -1,7 +1,7 @@
 (function() {
     "use strict";
     angular.module('junkbox', [])
-        .controller('twitters', function($scope, $interval, $timeout) {
+        .controller('twitters', function($scope, $sce, $interval, $timeout) {
 
             var posts = [];
 
@@ -12,7 +12,8 @@
                     name: option.name,
                     text: option.text,
                     image: option.image,
-                    size: option.size
+                    size: option.size,
+                    videoID: option.videoID
                 });
             }
 
@@ -27,13 +28,15 @@
             }
 
             socket.on("instagram", function(post) {
+                console.log(post);
                 addPost({
                     photo: post.user.profile_picture,
                     username: post.user.username,
                     name: post.user.full_name,
                     text: post.caption.text,
                     image: post.images.standard_resolution.url,
-                    size: "height"
+                    size: "height",
+                    videoID: post.videoID !== undefined ? $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + post.videoID + "?autoplay=1") : false
                 });
             });
 
@@ -50,10 +53,11 @@
                     name: msg.user.name,
                     text: msg.text,
                     image: media !== undefined ? media[0].media_url + ":large" : false,
-                    size: style
+                    size: style,
+                    videoID: msg.videoID !== undefined ? $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + msg.videoID + "?autoplay=1") : false
+
                 });
             });
-
             var i = 0;
             $timeout(function(){
                 if ((i + 1) <= posts.length) {

@@ -60,9 +60,12 @@
     app.post("/admin", function(req, res) {
         var clientIP = req.connection.remoteAddress;
         var hashtag = req.body.hashtag;
+        var youtube = req.body.youtube !== undefined;
+        var spotify = req.body.spotify !== undefined;
+
         if (isAuth(clientIP)) {
             if (!started) {
-                server.start(hashtag);
+                server.start(hashtag, spotify, youtube);
                 started = true;
                 res.redirect("/admin");
             } else {

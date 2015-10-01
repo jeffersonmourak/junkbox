@@ -21,7 +21,7 @@
         socket: function() {
         },
 
-        start: function(port) {
+        start: function(port,youtube) {
             var self = this;
             io.on('connection', function(socket) {
                 self.socket(socket);
@@ -36,11 +36,12 @@
             });
 
             app.get('/', function(req, res) {
-                res.sendFile(__dirname + '/pages/index.html');
-            });
-
-            app.get('/dj', function(req, res) {
-                res.sendFile(__dirname + '/pages/DJ.html');
+                if(youtube){
+                    res.sendFile(__dirname + '/pages/index-youtube.html');
+                }
+                else{
+                    res.sendFile(__dirname + '/pages/index.html');
+                }
             });
 
             app.get("/api/analytics",function(req, res){

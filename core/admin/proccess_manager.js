@@ -36,11 +36,21 @@ function EndServer() {
 
 
 
-function StartServer(track) {
+function StartServer(track, spotify, youtube) {
     function puts(error, stdout, stderr) {
         console.log("Server DOWN");
     }
-    var child = exec("node index.js -its " + track, puts);
+
+    var dataString = "its";
+
+    if(spotify){
+        dataString += "p";
+    }
+    if(youtube){
+        dataString += "y";
+    }
+
+    var child = exec("node index.js -" + dataString + " " + track, puts);
     killID = child.pid;
     child.stdout.on('data', function(data) {
         console.log('stdout: ' + data);
