@@ -17,6 +17,9 @@
                     <i class="ton-li-home"></i>
                 </div>
                 <div class="item">
+                    <a href="/admin/dj"><i class="ton-li-nota-1"></i></a>
+                </div>
+                <div class="item">
                     <form id="starter" action="" method="post">
                         <a href="#" onclick="document.getElementById('starter').submit();"> <i class="ton-li-on-off"></i> </a>
                     </form>
@@ -31,6 +34,7 @@
         </div>
     </header>
     <section class="content center col-md-8 col-md-offset-2">
+        <div id="chart_div" style="width: 1000px; height: 500px;"></div>
     </section>
     <footer>
         Todos os direitos Reservados, Aurum Sistemas
@@ -38,8 +42,36 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
-    <script ng-src="{{clientSocket}}"></script>
-    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script>
+    google.load("visualization", "1", {
+        packages: ["corechart"]
+    });
+    google.setOnLoadCallback(drawChart([
+            ['Hora', 'Twitter', 'Instagram'],
+            ['0', 0, 0]
+        ]));
+
+    function drawChart(table) {
+        var data = google.visualization.arrayToDataTable(table);
+
+        var options = {
+            title: 'Postagens Por Hora',
+            hAxis: {
+                title: 'Hora',
+                titleTextStyle: {
+                    color: '#333'
+                }
+            },
+            vAxis: {
+                minValue: 0
+            }
+        };
+
+        var GOOGLE_chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+        GOOGLE_chart.draw(data, options);
+    }
+    </script>
     <script src="/static/js/application/controllers/admin-controller.js"></script>
 </body>
 

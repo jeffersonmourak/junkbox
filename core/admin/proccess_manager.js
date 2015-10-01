@@ -40,7 +40,7 @@ function StartServer(track) {
     function puts(error, stdout, stderr) {
         console.log("Server DOWN");
     }
-    var child = exec("node index.js -it " + track, puts);
+    var child = exec("node index.js -its " + track, puts);
     killID = child.pid;
     child.stdout.on('data', function(data) {
         console.log('stdout: ' + data);

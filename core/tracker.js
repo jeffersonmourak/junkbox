@@ -30,7 +30,7 @@
                     self.data(tweet);
                 });
                 stream.on('error', function(error) {
-                    console.log("Error");
+                    console.log(error);
                 });
             });
         }

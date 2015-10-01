@@ -39,7 +39,8 @@
 
             socket.on('tweet', function(msg) {
                 var media = msg.entities.media;
-
+                console.log(msg);
+                var style = "";
                 if (media !== undefined) {
                     style = media[0].sizes.large.w > media[0].sizes.large.h ? "width" : "height";
                 }
@@ -54,10 +55,8 @@
             });
 
             var i = 0;
-            $interval(function() {
-                console.log(posts);
+            $timeout(function(){
                 if ((i + 1) <= posts.length) {
-                    console.log("HERE");
                     $scope.loading = true;
                     $scope.post = posts[i];
                     $interval(function() {
@@ -66,8 +65,22 @@
 
                     i++;
                 }
+            },5000);
+            $interval(function() {
+                if ((i + 1) <= posts.length) {
+                    $scope.loading = true;
+                    $scope.post = posts[i];
+                    $interval(function() {
+                        $scope.loading = false;
+                    }, 20);
 
-            }, 10000);
+                    i++;
+                }
+                else{
+                    i = 0;
+                }
+
+            }, 35000);
 
         });
 

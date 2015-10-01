@@ -5,61 +5,78 @@
     <meta charset="UTF-8">
     <title>The JunkBox</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/font.css">
+    <link rel="stylesheet" href="/static/css/admin.css">
     <link rel="stylesheet" href="/static/css/dj.css">
 </head>
 
 <body>
-    <h1>Welcome to JunkBox</h1>
-    <div ng-controller="musics" class="col-md-8">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Pesquisar Pedido</span>
-                    <input ng-model="searchText" type="text" class="form-control" aria-describedby="basic-addon1">
+    <header>
+        <nav>
+            <div class="col-md-8 no-margin">
+                <div class="item">
+                    <a href="/admin"><i class="ton-li-home"></i></a>
                 </div>
-                <br>
-                <ul class="list-group">
-                    <li ng-repeat="music in musics | orderBy:'-votes' | filter:searchText" ng-hide="music.played" class="list-group-item tracks">
-                        <span>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <button style="display:inline-block;" type="button" ng-click="music.played = true" class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                                    </button>
-                                    <h3 style="display:inline-block;" class="panel-title">{{music.name}}</h3>
-                                    <span style="float:right;" class="badge">{{music.votes}}</span>
+                <div class="item highlight">
+                    <i class="ton-li-nota-1"></i>
+                </div>
+                <div class="item">
+                    <form id="starter" action="" method="post">
+                        <a href="#" onclick="document.getElementById('starter').submit();"> <i class="ton-li-on-off"></i> </a>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-4 no-margin">
+                <h2><i class="ton-li-nota-1"></i> Junkbox™</h2>
+            </div>
+        </nav>
+    </header>
+    <section class="content col-md-8 col-md-offset-2">
+
+        <div ng-controller="musics" class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Pesquisar Pedido</span>
+                        <input ng-model="searchText" type="text" class="form-control" aria-describedby="basic-addon1">
+                    </div>
+                    <br>
+                    <ul class="list-group">
+                        <li ng-repeat="music in musics | orderBy:'-votes' | filter:searchText" ng-hide="music.played" class="list-group-item tracks">
+                            <span>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <button style="display:inline-block;" type="button" ng-click="music.played = true" class="btn btn-danger">
+                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                        </button>
+                                        <h3 style="display:inline-block;" class="panel-title">{{music.name}}</h3>
+                                        <span style="float:right;" class="badge">{{music.votes}}</span>
+                                    </div>
+                                    <div class="panel-body">
+                                        <img class="album-cover" ng-src="{{music.album.images[2].url}}" alt="{{music.album.name}}">
+                                        <span style="display:inline-block;">
+                                            <h3>{{music.name}}</h3>
+                                            <h4>{{music.album.name}}</h4>
+                                        </span> <br>
+                                        <iframe ng-src="{{music.uri}}" width="300" height="150" frameborder="0" allowtransparency="true"></iframe>
+                                    </div>
                                 </div>
-                                <div class="panel-body">
-                                    <img class="album-cover" ng-src="{{music.album.images[2].url}}" alt="{{music.album.name}}">
-                                    <span style="display:inline-block;">
-                                        <h3>{{music.name}}</h2>
-                                        <h4>{{music.album.name}}</h4>
-                                    </span> <br>
-                                    <iframe ng-src="{{music.uri}}" width="300" height="150" frameborder="0" allowtransparency="true"></iframe>
-                                </div>
-                            </div>
-                        </span>
-                    </li>
-                </ul>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div ng-controller="dj-twitters" class="col-md-4">
-        <ul class="list-group">
-            <li ng-repeat="tweet in twitters" class="list-group-item">
-                <img ng-src="{{tweet.photo}}"> <span>{{tweet.name}} ({{tweet.username}}) </span>
-                <p>
-                    {{tweet.tweet}}
-                </p>
-            </li>
-        </ul>
-    </div>
+    </section>
+    <footer>
+        Todos os direitos Reservados, Aurum Sistemas
+    </footer>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular-animate.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-    <script src="/static/js/junkbox.js"></script>
+    <script src="/static/js/application/controllers/music-controller.js"></script>
 </body>
 
 </html>

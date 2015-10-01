@@ -43,7 +43,7 @@
             res.redirect("/admin");
         }
     });
-    
+
     app.get('/admin', function(req, res) {
         var clientIP = req.connection.remoteAddress;
         if (isAuth(clientIP)) {
@@ -73,6 +73,18 @@
         }
     });
 
+    app.get('/admin/dj', function(req, res) {
+        var clientIP = req.connection.remoteAddress;
+        if (isAuth(clientIP)) {
+            if (!started) {
+                res.sendFile(__dirname + '/core/pages/admin.html');
+            } else {
+                res.sendFile(__dirname + '/core/pages/DJ.html');
+            }
+        } else {
+            res.redirect("/");
+        }
+    });
 
     http.listen(port, function() {
         console.log("server running on http://localhost:" + port);
