@@ -9,7 +9,7 @@
             $scope.musics = [];
 
             function getMusics() {
-                $http.get("http://localhost:3001/api/musics")
+                $http.get("http://ateliebar.com:3001/api/musics")
                     .then(function(response) {
                         for (var j in response.data) {
                             var msg = response.data[j];

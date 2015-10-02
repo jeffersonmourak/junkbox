@@ -23,8 +23,8 @@
             $scope.loading = true;
 
             $scope.advise = {
-                image: "http://maxcdn.thedesigninspiration.com/wp-content/uploads/2014/06/App-Dashboard-Design-005.jpg",
-                size: "width"
+                image: "http://ateliebar.com:3001/static/bg.png",
+                size: "height"
             }
 
             socket.on("instagram", function(post) {
@@ -84,7 +84,7 @@
                     i = 0;
                 }
 
-            }, 35000);
+            }, 2000);
 
         });
 

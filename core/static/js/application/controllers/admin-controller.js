@@ -74,7 +74,7 @@
             $scope.analytics.instagram = [];
             $scope.analytics.twitter = [];
             $interval(function() {
-                $http.get("http://localhost:3001/api/analytics").then(function(response) {
+                $http.get("http://ateliebar.com:3001/api/analytics").then(function(response) {
                     $scope.analytics.instagram = parseDate(response.data.instagram);
                     $scope.analytics.twitter = parseDate(response.data.twits);
 
